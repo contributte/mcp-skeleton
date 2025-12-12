@@ -1,0 +1,41 @@
+# ======================================
+# Includes ===============================
+includes:
+	# local overrides
+	- local.neon
+
+# ======================================
+# Config ===============================
+php:
+	date.timezone: Europe/Prague
+	# session.save_path: %tempDir%/session
+
+# ======================================
+# Extensions ===========================
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	mcp: Contributte\Mcp\DI\McpExtension
+
+# ======================================
+# MCP ==================================
+mcp:
+	debug:
+		panel: %debugMode%
+
+	servers:
+		default:
+			name: MCP Skeleton
+			version: 1.0.0
+			discovery:
+				basePath: %appDir%
+				scanDirs:
+					- Domain/Mcp
+				excludeDirs:
+					- ../vendor
+					- ../tests
+
+# ======================================
+# Services =============================
+services:
+	- Contributte\Mcp\Console\McpCommand
+	nella.routerFactory: App\Model\Router\RouterFactory
