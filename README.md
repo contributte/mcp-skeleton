@@ -2,7 +2,7 @@
 
 <p align=center>
   <a href="https://github.com/contributte/mcp-skeleton/actions"><img src="https://badgen.net/github/checks/contributte/mcp-skeleton/master"></a>
-  <a href="https://coveralls.io/r/contributte/mcp-skeleton"><img src="https://badgen.net/coveralls/c/github/contributte/mcp-skeleton"></a>
+  <a href="https://codecov.io/gh/contributte/mcp-skeleton"><img src="https://badgen.net/codecov/c/github/contributte/mcp-skeleton"></a>
   <a href="https://packagist.org/packages/contributte/mcp-skeleton"><img src="https://badgen.net/packagist/dm/contributte/mcp-skeleton"></a>
   <a href="https://packagist.org/packages/contributte/mcp-skeleton"><img src="https://badgen.net/packagist/v/contributte/mcp-skeleton"></a>
 </p>
