@@ -19,7 +19,7 @@ make init
 
 `make project` installs dependencies and prepares writable runtime directories. `make init` creates `config/local.neon`, where optional local parameter overrides can be added.
 
-## Streamable HTTP
+## Streamable HTTP workflow
 
 Start the development server:
 
@@ -29,21 +29,23 @@ make dev
 
 The application is available at <http://localhost:8080> and the streamable HTTP MCP endpoint is <http://localhost:8080/mcp>.
 
-In another terminal, start the inspector:
+In another terminal, start the tracked MCP Inspector command:
 
 ```bash
 make inspector
 ```
 
-Open the inspector and connect it to `http://localhost:8080/mcp`.
+Connect the Inspector to `http://localhost:8080/mcp`. This repository provides the Inspector command and MCP endpoint only; it does not configure or document a separate Inspector UI URL.
 
-## STDIO and capabilities
+## STDIO workflow
 
-Run the STDIO server with the MCP Inspector:
+Run the STDIO server through the MCP Inspector:
 
 ```bash
 make mcp-stdio
 ```
+
+## Example capabilities
 
 The default server uses attribute discovery in `app/Domain/Mcp` and exposes these example capabilities:
 
@@ -51,6 +53,8 @@ The default server uses attribute discovery in `app/Domain/Mcp` and exposes thes
 - resources: `app://config`, `file://readme`
 - resource template: `app://users/{id}`
 - prompts: `code_review`, `explain_code`
+
+For a concrete tool invocation, call `calculator_add` with `a: 2` and `b: 3`; its implementation returns `5`.
 
 ## Quality checks
 
