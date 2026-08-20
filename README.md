@@ -1,98 +1,83 @@
-![](https://heatbadger.now.sh/github/readme/contributte/mcp-skeleton/)
-
-<p align=center>
-  <a href="https://github.com/contributte/mcp-skeleton/actions"><img src="https://badgen.net/github/checks/contributte/mcp-skeleton/master"></a>
-  <a href="https://codecov.io/gh/contributte/mcp-skeleton"><img src="https://badgen.net/codecov/c/github/contributte/mcp-skeleton"></a>
-  <a href="https://packagist.org/packages/contributte/mcp-skeleton"><img src="https://badgen.net/packagist/dm/contributte/mcp-skeleton"></a>
-  <a href="https://packagist.org/packages/contributte/mcp-skeleton"><img src="https://badgen.net/packagist/v/contributte/mcp-skeleton"></a>
-</p>
-<p align=center>
-  <a href="https://packagist.org/packages/contributte/mcp-skeleton"><img src="https://badgen.net/packagist/php/contributte/mcp-skeleton"></a>
-  <a href="https://github.com/contributte/mcp-skeleton"><img src="https://badgen.net/github/license/contributte/mcp-skeleton"></a>
-  <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
-  <a href="https://bit.ly/cttfo"><img src="https://badgen.net/badge/support/forum/yellow"></a>
-  <a href="https://contributte.org/partners.html"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
-</p>
-
-<p align=center>
-Website 🚀 <a href="https://contributte.org">contributte.org</a> | Contact 👨🏻‍💻 <a href="https://f3l1x.io">f3l1x.io</a> | Twitter 🐦 <a href="https://twitter.com/contributte">@contributte</a>
-</p>
-
------
-
 # MCP Skeleton
 
-Example project demonstrating integration of **Model Context Protocol (MCP)** for **Nette Framework** using `contributte/mcp`.
+A Composer project skeleton demonstrating Model Context Protocol (MCP) integration with the Nette Framework through [`contributte/mcp`](https://github.com/contributte/mcp/tree/master/.docs).
 
-The MCP integration is based on the upstream documentation: [contributte/mcp docs](https://github.com/contributte/mcp/tree/master/.docs).
+<p align="center">
+  <a href="https://github.com/contributte/mcp-skeleton/actions"><img src="https://badgen.net/github/checks/contributte/mcp-skeleton/master" alt="GitHub checks"></a>
+  <a href="https://codecov.io/gh/contributte/mcp-skeleton"><img src="https://badgen.net/codecov/c/github/contributte/mcp-skeleton" alt="Coverage"></a>
+  <a href="https://packagist.org/packages/contributte/mcp-skeleton"><img src="https://badgen.net/packagist/v/contributte/mcp-skeleton" alt="Packagist version"></a>
+  <a href="https://github.com/contributte/mcp-skeleton"><img src="https://badgen.net/github/license/contributte/mcp-skeleton" alt="MIT license"></a>
+</p>
 
-![](https://github.assets.f3l1x.io/contributte-mcp-project1.gif)
+![MCP Skeleton demo](https://github.assets.f3l1x.io/contributte-mcp-project1.gif)
 
-## Requirements
+## Quick Start
 
-- PHP 8.4+
-- Composer
-- Node.js (only for MCP inspector via `npx`)
+**Requirements:** PHP 8.4 or later, Composer, Node.js, and `npx` for the MCP Inspector.
 
-## Installation
+Create a project. `composer create-project` installs its dependencies; do not run `composer install` again.
 
 ```bash
-composer install
+composer create-project contributte/mcp-skeleton my-mcp-server
+cd my-mcp-server
 ```
 
-## Usage
+Create the ignored local configuration file, then prepare the writable Nette cache and log directories:
 
-This skeleton registers a single MCP server named `default` and uses **attribute auto-discovery** from `app/Domain/Mcp`.
+```bash
+make init
+make setup
+```
 
-**Capabilities:**
+Start the stdio MCP server through the Inspector:
 
-- Tools:
-  - `calculator_add`
-  - `calculator_multiply`
-- Resources:
-  - `app://config`
-  - `file://readme`
-- Resource templates:
-  - `app://users/{id}`
-- Prompts:
-  - `code_review`
-  - `explain_code`
+```bash
+make mcp-stdio
+```
 
-### Streamable HTTP server
+The Inspector starts the repository's `php bin/console mcp:server` command as its stdio server. In the Inspector, connect to that launched stdio server, then call `calculator_add` with:
 
-1. Start inspector: `make inspector`
-2. Open the inspector in your browser and connect to `http://localhost:8080/mcp`.
+```json
+{
+  "a": 1,
+  "b": 2
+}
+```
 
-#### Manual
+Repository-backed, unexecuted behavior: the tool returns the integer `3`.
 
-1. Start inspector: `make inspector` (or `make mcp-stdio` to auto-run the STDIO server)
-2. Open the inspector in your browser and do work.
+The skeleton discovers MCP attributes in `app/Domain/Mcp` for its `default` server. It includes calculator tools, resources, a user resource template, and code-review prompts. No database, migration, fixture, or credential setup is tracked for this example. Local overrides belong in the ignored `config/local.neon`, created from `config/local.neon.example`.
+
+## HTTP Endpoint
+
+The application routes an MCP HTTP endpoint at `/mcp`. The tracked development recipe starts PHP at `http://localhost:8080`, but it does not provide a router script for PHP's built-in server; therefore a clean-checkout HTTP MCP procedure cannot be safely documented from the tracked recipes. Use the stdio route above, or configure a compatible web server with `www/` as its document root and its supplied rewrite rules.
+
+## Verification
+
+Run the repository test suite:
+
+```bash
+make tests
+```
 
 ## Screenshots
 
-### STDIO
+### Stdio
 
-![STDIO - terminal output](.docs/stdio-terminal.png)
+![STDIO terminal output](.docs/stdio-terminal.png)
 
-![MCP Inspector - STDIO resources](.docs/stdio.png)
+![MCP Inspector STDIO resources](.docs/stdio.png)
 
 ### Streamable HTTP
 
-![Streamable HTTP - terminal output](.docs/streamable-terminal.png)
+![Streamable HTTP terminal output](.docs/streamable-terminal.png)
 
-![MCP Inspector - Streamable HTTP tools](.docs/streamable.png)
+![MCP Inspector Streamable HTTP tools](.docs/streamable.png)
 
+## Contributing
 
-## Development
+This is a [Contributte](https://contributte.org) project. See [Contributte's contribution guide](https://contributte.org/contributing.html) and the [repository](https://github.com/contributte/mcp-skeleton) for the contribution route.
 
-See [how to contribute](https://contributte.org/contributing.html) to this package.
+## License
 
-This package is currently maintaining by these authors.
-
-<a href="https://github.com/f3l1x">
-    <img width="80" height="80" src="https://avatars2.githubusercontent.com/u/538058?v=3&s=80">
-</a>
-
------
-
-Consider to [support](https://contributte.org/partners.html) **contributte** development team. Also thank you for using this project.
+Copyright 2025 Contributte. Released under the [MIT License](LICENSE).
